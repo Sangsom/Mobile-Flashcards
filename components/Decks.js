@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { Text, View, FlatList } from "react-native";
-
-const decks = [
-  { name: "udacicards", cards: 3 },
-  { name: "new deck", cards: 1 },
-  { name: "New deck 2", cards: 0 },
-  { name: "English", cards: 13 },
-  { name: "React Native", cards: 51 }
-];
+import { connect } from "react-redux";
+import { receiveDecks } from "../actions/receive_decks";
 
 class Decks extends Component {
+  componentDidMount() {
+    this.props.receiveDecks();
+  }
+
   render() {
+    const { decks } = this.props;
     return (
       <View>
         <FlatList
@@ -27,4 +26,10 @@ class Decks extends Component {
   }
 }
 
-export default Decks;
+function mapStateToProps(state) {
+  return {
+    decks: state.decks
+  };
+}
+
+export default connect(mapStateToProps, { receiveDecks })(Decks);
