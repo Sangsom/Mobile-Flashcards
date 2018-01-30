@@ -2,24 +2,25 @@ import React, { Component } from "react";
 import { Text, View, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { receiveDecks } from "../actions/receive_decks";
+import { fetchDecks } from "../utils/api";
+import _ from "lodash";
 
 class Decks extends Component {
   componentDidMount() {
-    this.props.receiveDecks();
+    fetchDecks().then(decks => {
+      this.props.receiveDecks(decks);
+    });
   }
 
   render() {
     const { decks } = this.props;
+    const decksObj = _.values(decks);
+
     return (
       <View>
         <FlatList
-          data={decks}
-          renderItem={({ item }) => (
-            <View key={item.name}>
-              <Text>{item.name}</Text>
-              <Text>{item.cards}</Text>
-            </View>
-          )}
+          data={decksObj}
+          renderItem={({ item }) => <Text>{item.title}</Text>}
         />
       </View>
     );
