@@ -1,5 +1,7 @@
+export const STORE_KEY = "@MobileFlashCards:Sangsom";
+
 export const initialDecks = {
-  1: {
+  React: {
     title: "React",
     questions: [
       {
@@ -12,7 +14,7 @@ export const initialDecks = {
       }
     ]
   },
-  2: {
+  JavaScript: {
     title: "JavaScript",
     questions: [
       {

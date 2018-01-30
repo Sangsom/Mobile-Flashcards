@@ -20,7 +20,12 @@ class Decks extends Component {
       <View>
         <FlatList
           data={decksObj}
-          renderItem={({ item }) => <Text>{item.title}</Text>}
+          renderItem={({ item }) => (
+            <View>
+              <Text>{item.title}</Text>
+              <Text>{item.questions.length} cards</Text>
+            </View>
+          )}
         />
       </View>
     );
