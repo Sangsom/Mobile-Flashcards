@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Text, View, FlatList, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
 import { connect } from "react-redux";
 import { receiveDecks } from "../actions/receive_decks";
 import { fetchDecks } from "../utils/api";
@@ -36,10 +42,16 @@ class Decks extends Component {
           ItemSeparatorComponent={this.seperator}
           keyExtractor={item => item.title}
           renderItem={({ item }) => (
-            <View style={styles.container}>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.cards}>{item.questions.length} cards</Text>
-            </View>
+            <TouchableOpacity
+              onPress={() => {
+                console.log("Pressed", item.title);
+              }}
+            >
+              <View style={styles.container}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.cards}>{item.questions.length} cards</Text>
+              </View>
+            </TouchableOpacity>
           )}
         />
       </View>
