@@ -9,6 +9,7 @@ import {
 import { connect } from "react-redux";
 import { receiveDecks } from "../actions/receive_decks";
 import { fetchDecks } from "../utils/api";
+import { grey } from "../utils/colors";
 import _ from "lodash";
 
 class Decks extends Component {
@@ -24,7 +25,7 @@ class Decks extends Component {
         style={{
           height: 1,
           width: "90%",
-          backgroundColor: "#CED0CE",
+          backgroundColor: grey,
           alignSelf: "center"
         }}
       />
@@ -44,7 +45,7 @@ class Decks extends Component {
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => {
-                console.log("Pressed", item.title);
+                console.log("Pressed", item);
               }}
             >
               <View style={styles.container}>
