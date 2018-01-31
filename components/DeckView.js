@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 class DeckView extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: `Viewing: ${navigation.state.params.deck.title} deck`
+  });
+
   render() {
     const { deck } = this.props.navigation.state.params;
 
