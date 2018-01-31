@@ -13,7 +13,12 @@ class DeckView extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>{deck.title}</Text>
         <Text style={styles.cards}>{deck.questions.length} cards</Text>
-        <Button title="Add Card" onPress={() => {}} />
+        <Button
+          title="Add Card"
+          onPress={() => {
+            this.props.navigation.navigate("AddCard", { id: "AddCard" });
+          }}
+        />
         <Button title="Start Quiz" onPress={() => {}} />
       </View>
     );
