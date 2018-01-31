@@ -1,5 +1,3 @@
-import React, { Component } from "react";
-import { Text, View } from "react-native";
 import { TabNavigator } from "react-navigation";
 import Decks from "./Decks";
 import Notifications from "./Notifications";
@@ -19,6 +17,9 @@ const Tabs = TabNavigator(
     animationEnabled: true,
     tabBarOptions: {
       activeTintColor: red
+    },
+    navigationOptions: {
+      header: null
     }
   }
 );

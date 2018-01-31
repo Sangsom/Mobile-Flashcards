@@ -44,9 +44,9 @@ class Decks extends Component {
           keyExtractor={item => item.title}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => {
-                console.log("Pressed", item);
-              }}
+              onPress={() =>
+                this.props.navigation.navigate("DeckView", { id: "hello" })
+              }
             >
               <View style={styles.container}>
                 <Text style={styles.title}>{item.title}</Text>
