@@ -1,6 +1,6 @@
 import { TabNavigator } from "react-navigation";
 import Decks from "./Decks";
-import Notifications from "./Notifications";
+import AddDeck from "./AddDeck";
 import { red } from "../utils/colors";
 
 const Tabs = TabNavigator(
@@ -8,8 +8,8 @@ const Tabs = TabNavigator(
     Decks: {
       screen: Decks
     },
-    Notifications: {
-      screen: Notifications
+    "Add Deck": {
+      screen: AddDeck
     }
   },
   {
