@@ -15,3 +15,8 @@ export function fetchDecks() {
     return JSON.parse(result);
   });
 }
+
+// This is not working
+export function addNewDeck(title) {
+  return AsyncStorage.setItem(STORE_KEY, title);
+}
