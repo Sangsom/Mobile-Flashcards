@@ -19,7 +19,12 @@ class DeckView extends Component {
             this.props.navigation.navigate("AddCard", { id: "AddCard" });
           }}
         />
-        <Button title="Start Quiz" onPress={() => {}} />
+        <Button
+          title="Start Quiz"
+          onPress={() => {
+            this.props.navigation.navigate("Quiz", { id: "Quiz" });
+          }}
+        />
       </View>
     );
   }
