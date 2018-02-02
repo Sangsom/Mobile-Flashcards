@@ -16,7 +16,7 @@ class DeckView extends Component {
         <Button
           title="Add Card"
           onPress={() => {
-            this.props.navigation.navigate("AddCard", { id: "AddCard" });
+            this.props.navigation.navigate("AddCard", { title: deck.title });
           }}
         />
         <Button

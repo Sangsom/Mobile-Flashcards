@@ -16,11 +16,33 @@ export function fetchDecks() {
   });
 }
 
-// This is not working
+/**
+ *
+ * @param {*Deck object} deck
+ * Adds new deck object to existing list
+ */
 export function addNewDeck(deck) {
   return AsyncStorage.mergeItem(STORE_KEY, JSON.stringify(deck), () => {
     AsyncStorage.getItem(STORE_KEY, (err, result) => {
       return JSON.parse(result);
     });
+  });
+}
+
+export function addNewCard(card, title) {
+  return AsyncStorage.getItem(STORE_KEY, (err, result) => {
+    let decks = JSON.parse(result);
+
+    // Add new questions to the existing ones
+    let questions = JSON.parse(JSON.stringify(decks[title].questions));
+    questions.push(card);
+
+    // Create new updated card
+    const newCard = JSON.stringify({
+      [title]: { title, questions }
+    });
+
+    // Merge to storage
+    AsyncStorage.mergeItem(STORE_KEY, newCard);
   });
 }
