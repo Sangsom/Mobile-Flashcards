@@ -4,18 +4,28 @@ import { connect } from "react-redux";
 import { addDeck } from "../actions/add_deck";
 import { addNewDeck } from "../utils/api";
 
+/**
+ * TODO: Notification that deck is added
+ * TODO: Validation if there aren't already such a deck
+ */
+
 class AddDeck extends Component {
   state = {
     title: ""
   };
 
   handleSubmit = () => {
-    // Problem on adding a new deck!!!
-    //console.log("Submitted", this.state.title);
-    //this.props.addDeck(this.state.title);
-    addNewDeck(this.state.title).then(result => {
-      //console.log(result);
-      this.props.addDeck(result);
+    const { title } = this.state;
+    const { addDeck } = this.props;
+    const newDeck = {
+      [title]: {
+        title,
+        questions: []
+      }
+    };
+
+    addNewDeck(newDeck).then(() => {
+      addDeck(newDeck);
     });
   };
 

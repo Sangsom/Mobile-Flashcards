@@ -17,6 +17,10 @@ export function fetchDecks() {
 }
 
 // This is not working
-export function addNewDeck(title) {
-  return AsyncStorage.setItem(STORE_KEY, title);
+export function addNewDeck(deck) {
+  return AsyncStorage.mergeItem(STORE_KEY, JSON.stringify(deck), () => {
+    AsyncStorage.getItem(STORE_KEY, (err, result) => {
+      return JSON.parse(result);
+    });
+  });
 }

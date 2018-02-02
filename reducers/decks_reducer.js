@@ -8,9 +8,9 @@ export default function(state = {}, action) {
         ...action.decks
       };
     case ADD_DECK:
-      console.log("REDUCER ADD DECK", action);
       return {
-        ...state
+        ...state,
+        ...action.deck
       };
     default:
       return state;

@@ -35,7 +35,6 @@ class Decks extends Component {
   render() {
     const { decks } = this.props;
     const decksObj = _.values(decks);
-    console.log("Decks List", decksObj);
 
     return (
       <View>
