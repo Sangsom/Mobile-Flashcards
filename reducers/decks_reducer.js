@@ -1,10 +1,9 @@
 import { RECEIVE_DECKS, ADD_DECK, ADD_CARD } from "../actions/actions";
 
-export default function(state = {}, action) {
+export default function (state = {}, action) {
   switch (action.type) {
     case RECEIVE_DECKS:
       return {
-        ...state,
         ...action.decks
       };
     case ADD_DECK:
@@ -13,9 +12,10 @@ export default function(state = {}, action) {
         ...action.deck
       };
     case ADD_CARD:
-      console.log("Reducer", action);
+      const { title, questions } = action.card;
       return {
-        ...state
+        ...state,
+        [title]: { ...state[title], questions }
       };
     default:
       return state;

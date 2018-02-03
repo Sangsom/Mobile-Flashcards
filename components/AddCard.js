@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, TextInput, Button } from "react-native";
+import { connect } from 'react-redux';
 import { styles } from "../utils/styles";
+import { addCard } from '../actions/add_card';
 import { addNewCard } from "../utils/api";
 
 class AddCard extends Component {
@@ -22,6 +24,8 @@ class AddCard extends Component {
     };
     addNewCard(newCard, title).then(result => {
       // How to return and pass to action creator a newly created deck???
+      const cur = JSON.parse(result);
+      this.props.addCard(cur[title]);
     });
   };
 
@@ -45,4 +49,4 @@ class AddCard extends Component {
     );
   }
 }
-export default AddCard;
+export default connect(null, { addCard })(AddCard);
