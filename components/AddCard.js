@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, TextInput, Button } from "react-native";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { styles } from "../utils/styles";
-import { addCard } from '../actions/add_card';
+import { addCard } from "../actions/add_card";
 import { addNewCard } from "../utils/api";
 
 class AddCard extends Component {
