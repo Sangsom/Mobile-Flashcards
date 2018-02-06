@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { View, Text, Button } from "react-native";
 import { connect } from "react-redux";
 import { styles } from "../utils/styles";
-
-/**
- * TODO: Need to properly show questions and it's numbers
- * TODO: Increment/decrement correct/incorrect answer count
- */
+import QuizButtons from "./QuizButtons";
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -70,7 +66,7 @@ class Quiz extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    const { questions, currentQuestion } = this.state;
+    const { questions, currentQuestion, correct, incorrect } = this.state;
     return (
       <View style={styles.container}>
         <Text>{this.cardCounter()}</Text>
@@ -82,16 +78,31 @@ class Quiz extends Component {
               title="Answer"
               onPress={() => {
                 navigate("QuizAnswer", {
-                  question: questions[currentQuestion]
+                  question: questions[currentQuestion],
+                  onCorrect: this.correct,
+                  onIncorrect: this.incorrect
                 });
               }}
-              disabled={currentQuestion == questions.length ? true : false}
             />
-            <Button title="Correct" onPress={this.correct} />
-            <Button title="Incorrect" onPress={this.incorrect} />
+            <QuizButtons
+              onCorrect={this.correct}
+              onIncorrect={this.incorrect}
+            />
           </View>
         ) : (
-          <Text>Results</Text>
+          <View>
+            <Text>Results</Text>
+            <Text>
+              You have answered {correct} out of {questions.length} questions
+              correctly.
+            </Text>
+            <Button
+              title="To decks"
+              onPress={() => {
+                navigate("Decks");
+              }}
+            />
+          </View>
         )}
       </View>
     );

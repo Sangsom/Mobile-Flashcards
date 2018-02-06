@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Button } from "react-native";
 import { styles } from "../utils/styles";
+import QuizButtons from "./QuizButtons";
 
 class QuizAnswer extends Component {
   static navigationOptions = {
@@ -8,15 +9,18 @@ class QuizAnswer extends Component {
   };
 
   render() {
+    const { onCorrect, onIncorrect } = this.props.navigation.state.params;
     const { answer } = this.props.navigation.state.params.question;
     const { goBack } = this.props.navigation;
 
     return (
       <View style={styles.container}>
         <Text>{answer}</Text>
-        <Button title="Question" onPress={() => goBack()} />
-        <Button title="Correct" onPress={() => {}} />
-        <Button title="Incorrect" onPress={() => {}} />
+        <QuizButtons
+          onCorrect={onCorrect}
+          onIncorrect={onIncorrect}
+          goBack={goBack}
+        />
       </View>
     );
   }
