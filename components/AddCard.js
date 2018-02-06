@@ -11,8 +11,8 @@ class AddCard extends Component {
   });
 
   state = {
-    question: "What's your name?",
-    answer: "My name is Bekija"
+    question: "",
+    answer: ""
   };
 
   handleSubmit = () => {
@@ -23,7 +23,6 @@ class AddCard extends Component {
       answer
     };
     addNewCard(newCard, title).then(result => {
-      // How to return and pass to action creator a newly created deck???
       const cur = JSON.parse(result);
       this.props.addCard(cur[title]);
     });
@@ -36,13 +35,11 @@ class AddCard extends Component {
           style={styles.textInput}
           placeholder="Question"
           onChangeText={question => this.setState({ question })}
-          value="What's your name?"
         />
         <TextInput
           style={styles.textInput}
           placeholder="Answer"
           onChangeText={text => this.setState({ answer: text })}
-          value="My name is Rinalds"
         />
         <Button title="Submit" onPress={this.handleSubmit} />
       </View>
