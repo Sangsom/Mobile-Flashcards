@@ -1,18 +1,107 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
+import { connect } from "react-redux";
+import { styles } from "../utils/styles";
+
+/**
+ * TODO: Need to properly show questions and it's numbers
+ * TODO: Increment/decrement correct/incorrect answer count
+ */
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Quiz"
+    title: `${navigation.state.params.title} Quiz`
   });
 
+  state = {
+    questions: [],
+    currentQuestion: 0,
+    correct: 0,
+    incorrect: 0
+  };
+
+  componentDidMount() {
+    const { title } = this.props.navigation.state.params;
+    const { decks } = this.props;
+    this.setState({
+      questions: decks[title].questions
+    });
+  }
+
+  cardCounter = () => {
+    const { questions, currentQuestion } = this.state;
+    let currentCard =
+      currentQuestion + 1 <= questions.length
+        ? currentQuestion + 1
+        : currentQuestion;
+    return `${currentCard} / ${questions.length} cards`;
+  };
+
+  correct = () => {
+    const { questions, currentQuestion, correct } = this.state;
+
+    if (currentQuestion < questions.length) {
+      this.setState({
+        currentQuestion: currentQuestion + 1,
+        correct: correct + 1
+      });
+    }
+  };
+
+  incorrect = () => {
+    const { questions, currentQuestion, incorrect } = this.state;
+
+    if (currentQuestion < questions.length) {
+      this.setState({
+        currentQuestion: currentQuestion + 1,
+        incorrect: incorrect + 1
+      });
+    }
+  };
+
+  showQuestion = () => {
+    const { questions, currentQuestion } = this.state;
+
+    // Show questions
+    if (questions[currentQuestion] !== undefined) {
+      return questions[currentQuestion].question;
+    }
+  };
+
   render() {
+    const { navigate } = this.props.navigation;
+    const { questions, currentQuestion } = this.state;
     return (
-      <View>
-        <Text>Quiz has been started</Text>
+      <View style={styles.container}>
+        <Text>{this.cardCounter()}</Text>
+        <Text>{this.showQuestion()}</Text>
+
+        {currentQuestion < questions.length ? (
+          <View>
+            <Button
+              title="Answer"
+              onPress={() => {
+                navigate("QuizAnswer", {
+                  question: questions[currentQuestion]
+                });
+              }}
+              disabled={currentQuestion == questions.length ? true : false}
+            />
+            <Button title="Correct" onPress={this.correct} />
+            <Button title="Incorrect" onPress={this.incorrect} />
+          </View>
+        ) : (
+          <Text>Results</Text>
+        )}
       </View>
     );
   }
 }
 
-export default Quiz;
+function mapStateToProps(state) {
+  return {
+    decks: state.decks
+  };
+}
+
+export default connect(mapStateToProps)(Quiz);
