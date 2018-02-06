@@ -3,6 +3,7 @@ import { View, Text, Button } from "react-native";
 import { connect } from "react-redux";
 import { styles } from "../utils/styles";
 import QuizButtons from "./QuizButtons";
+import QuizResults from "./QuizResults";
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -90,19 +91,12 @@ class Quiz extends Component {
             />
           </View>
         ) : (
-          <View>
-            <Text>Results</Text>
-            <Text>
-              You have answered {correct} out of {questions.length} questions
-              correctly.
-            </Text>
-            <Button
-              title="To decks"
-              onPress={() => {
-                navigate("Decks");
-              }}
-            />
-          </View>
+          <QuizResults
+            quizLength={questions.length}
+            correct={correct}
+            incorrect={incorrect}
+            navigate={navigate}
+          />
         )}
       </View>
     );
