@@ -3,10 +3,21 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
     justifyContent: "center",
+    paddingHorizontal: 10
+  },
+  title: {
+    alignSelf: "center",
+    fontSize: 60
+  },
+  cards: {
+    alignSelf: "center",
+    fontSize: 20
+  },
+  button: {
     alignItems: "center",
-    padding: 50
+    backgroundColor: "#DDD",
+    padding: 10
   },
   textInput: {
     padding: 10,

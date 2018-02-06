@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
+import AppText from "./AppText";
+import { styles } from "../utils/styles";
 
 class DeckView extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -14,20 +16,24 @@ class DeckView extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{deckTitle}</Text>
+        <AppText style={[styles.title]}>{deckTitle}</AppText>
         <Text style={styles.cards}>{deck.questions.length} cards</Text>
-        <Button
-          title="Add Card"
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => {
             navigate("AddCard", { title: deckTitle });
           }}
-        />
-        <Button
-          title="Start Quiz"
+        >
+          <AppText>Add Card</AppText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => {
             navigate("Quiz", { title: deckTitle });
           }}
-        />
+        >
+          <AppText>Start Quiz</AppText>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -38,21 +44,5 @@ function mapStateToProps(state) {
     decks: state.decks
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 50
-  },
-  title: {
-    fontSize: 30
-  },
-  cards: {
-    fontSize: 20
-  }
-});
 
 export default connect(mapStateToProps)(DeckView);
