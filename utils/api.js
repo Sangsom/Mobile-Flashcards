@@ -30,19 +30,24 @@ export function addNewDeck(deck) {
 }
 
 export function addNewCard(card, title) {
-  return AsyncStorage.getItem(STORE_KEY, (err, result) => {
-    let decks = JSON.parse(result);
+  return AsyncStorage.getItem(STORE_KEY)
+    .then(result => {
+      let decks = JSON.parse(result);
 
-    // Add new questions to the existing ones
-    let questions = JSON.parse(JSON.stringify(decks[title].questions));
-    questions.push(card);
+      // Add new questions to the existing ones
+      let questions = JSON.parse(JSON.stringify(decks[title].questions));
+      questions.push(card);
 
-    // Create new updated card
-    const newCard = JSON.stringify({
-      [title]: { title, questions }
+      // Create new updated card
+      const newCard = JSON.stringify({
+        [title]: { title, questions }
+      });
+
+      return newCard;
+    })
+    .then(updatedDeck => {
+      return AsyncStorage.mergeItem(STORE_KEY, updatedDeck).then(result => {
+        return AsyncStorage.getItem(STORE_KEY);
+      });
     });
-
-    // Merge to storage
-    AsyncStorage.mergeItem(STORE_KEY, newCard);
-  });
 }
