@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import AppText from "./AppText";
 import { styles } from "../utils/styles";

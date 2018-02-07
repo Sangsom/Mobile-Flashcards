@@ -1,16 +1,10 @@
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity
-} from "react-native";
+import { View } from "react-native";
 import { connect } from "react-redux";
 import { receiveDecks } from "../actions/receive_decks";
 import { fetchDecks } from "../utils/api";
-import { grey } from "../utils/colors";
 import _ from "lodash";
+import { List, ListItem } from "react-native-elements";
 
 class Decks extends Component {
   componentDidMount() {
@@ -19,44 +13,32 @@ class Decks extends Component {
     });
   }
 
-  seperator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: "90%",
-          backgroundColor: grey,
-          alignSelf: "center"
-        }}
-      />
-    );
-  };
-
   render() {
-    const { decks } = this.props;
+    const { decks, navigation } = this.props;
     const decksObj = _.values(decks);
 
     return (
       <View>
-        <FlatList
-          data={decksObj}
-          ItemSeparatorComponent={this.seperator}
-          keyExtractor={item => item.title}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate("DeckView", {
-                  deckTitle: item.title
-                })
-              }
-            >
-              <View style={styles.container}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.cards}>{item.questions.length} cards</Text>
-              </View>
-            </TouchableOpacity>
-          )}
-        />
+        <List containerStyle={{ marginBottom: 30 }}>
+          {decksObj.map(deck => (
+            <ListItem
+              roundAvatar
+              leftIcon={{ name: "folder" }}
+              key={deck.title}
+              title={deck.title}
+              badge={{
+                value: deck.questions.length,
+                textStyle: { color: "orange" }
+              }}
+              fontFamily="Roboto"
+              onPress={() => {
+                navigation.navigate("DeckView", {
+                  deckTitle: deck.title
+                });
+              }}
+            />
+          ))}
+        </List>
       </View>
     );
   }
@@ -67,21 +49,5 @@ function mapStateToProps(state) {
     decks: state.decks
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 50
-  },
-  title: {
-    fontSize: 30
-  },
-  cards: {
-    fontSize: 20
-  }
-});
 
 export default connect(mapStateToProps, { receiveDecks })(Decks);
