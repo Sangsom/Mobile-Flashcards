@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     alignSelf: "center",
-    fontSize: 60
+    fontSize: 30
   },
   cards: {
     alignSelf: "center",
