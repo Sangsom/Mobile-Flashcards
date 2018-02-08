@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import { addCard } from "../actions/add_card";
 import { addNewCard } from "../utils/api";
+import { blue } from "../utils/colors";
 
 class AddCard extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -107,7 +108,7 @@ class AddCard extends Component {
 
           <Button
             buttonStyle={styles.buttonStyle}
-            backgroundColor="#03A9F4"
+            backgroundColor={blue}
             title="Submit"
             onPress={this.handleSubmit}
           />
