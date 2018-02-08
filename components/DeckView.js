@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Text, ScrollView, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { Card, Button } from "react-native-elements";
+import { blue } from "../utils/colors";
 
 class DeckView extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -28,7 +29,7 @@ class DeckView extends Component {
             {deck.questions.length} card(-s) are hidden in this deck.
           </Text>
           <Button
-            backgroundColor="#03A9F4"
+            backgroundColor={blue}
             title="Add Card"
             buttonStyle={styles.buttonStyle}
             onPress={() => {
@@ -36,7 +37,7 @@ class DeckView extends Component {
             }}
           />
           <Button
-            backgroundColor="#03A9F4"
+            backgroundColor={blue}
             title="Start Quiz"
             buttonStyle={styles.buttonStyle}
             onPress={() => {
