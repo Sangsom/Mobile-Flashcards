@@ -1,30 +1,47 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { Button, Text } from "react-native-elements";
+import Icon from "react-native-vector-icons/Entypo";
+import { green, red } from "../utils/colors";
 
 const QuizButtons = props => {
   const { onCorrect, onIncorrect } = props;
   return (
-    <View>
-      <Button
-        title="Correct"
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "space-around"
+      }}
+    >
+      <TouchableOpacity
         onPress={() => {
           onCorrect();
           if (props.goBack) {
             props.goBack();
           }
         }}
-      />
-      <Button
-        title="Incorrect"
+      >
+        <Icon name="thumbs-up" size={60} color={green} />
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => {
           onIncorrect();
           if (props.goBack) {
             props.goBack();
           }
         }}
-      />
+      >
+        <Icon name="thumbs-down" size={60} color={red} />
+      </TouchableOpacity>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonStyle: {
+    marginBottom: 10
+  }
+});
 
 export default QuizButtons;

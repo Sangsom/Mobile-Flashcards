@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
+import { Text, StyleSheet, ScrollView } from "react-native";
+import { Card, Button, Divider } from "react-native-elements";
 import { connect } from "react-redux";
-import { styles } from "../utils/styles";
 import QuizButtons from "./QuizButtons";
 import QuizResults from "./QuizResults";
+import { blue } from "../utils/colors";
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -69,14 +70,21 @@ class Quiz extends Component {
     const { navigate } = this.props.navigation;
     const { questions, currentQuestion, correct, incorrect } = this.state;
     return (
-      <View style={styles.container}>
-        <Text>{this.cardCounter()}</Text>
-        <Text>{this.showQuestion()}</Text>
-
+      <ScrollView>
         {currentQuestion < questions.length ? (
-          <View>
+          <Card
+            title={this.showQuestion()}
+            fontFamily="Roboto"
+            image={{
+              uri: "https://picsum.photos/200/300/?random"
+            }}
+          >
+            <Text>{this.cardCounter()}</Text>
+            <Divider style={styles.dividerStyle} />
             <Button
+              backgroundColor={blue}
               title="Answer"
+              buttonStyle={styles.buttonStyle}
               onPress={() => {
                 navigate("QuizAnswer", {
                   question: questions[currentQuestion],
@@ -89,7 +97,7 @@ class Quiz extends Component {
               onCorrect={this.correct}
               onIncorrect={this.incorrect}
             />
-          </View>
+          </Card>
         ) : (
           <QuizResults
             quizLength={questions.length}
@@ -98,10 +106,20 @@ class Quiz extends Component {
             navigate={navigate}
           />
         )}
-      </View>
+      </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  buttonStyle: {
+    marginBottom: 10
+  },
+  dividerStyle: {
+    marginTop: 10,
+    marginBottom: 10
+  }
+});
 
 function mapStateToProps(state) {
   return {

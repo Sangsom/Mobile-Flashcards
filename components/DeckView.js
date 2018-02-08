@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, ScrollView } from "react-native";
+import { Text, ScrollView, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { Card, Button } from "react-native-elements";
 
@@ -12,35 +12,33 @@ class DeckView extends Component {
     const { deckTitle } = this.props.navigation.state.params;
     const deck = this.props.decks[deckTitle];
     const { navigate } = this.props.navigation;
-    console.log(deck);
 
     return (
       <ScrollView>
         <Card
           title={deckTitle}
-          titleStyle={{ fontSize: 30 }}
+          titleStyle={styles.titleStyle}
           fontFamily="Roboto"
           image={{
             uri: "https://picsum.photos/200/300/?random"
           }}
-          containerStyle={{ padding: 10 }}
+          containerStyle={styles.containerStyle}
         >
-          <Text style={{ marginBottom: 10 }}>
+          <Text style={styles.textStyle}>
             {deck.questions.length} card(-s) are hidden in this deck.
           </Text>
           <Button
-            icon={{ name: "add" }}
             backgroundColor="#03A9F4"
             title="Add Card"
-            buttonStyle={{ marginBottom: 10 }}
+            buttonStyle={styles.buttonStyle}
             onPress={() => {
               navigate("AddCard", { title: deckTitle });
             }}
           />
           <Button
-            icon={{ name: "add" }}
             backgroundColor="#03A9F4"
             title="Start Quiz"
+            buttonStyle={styles.buttonStyle}
             onPress={() => {
               navigate("Quiz", { title: deckTitle });
             }}
@@ -56,5 +54,20 @@ function mapStateToProps(state) {
     decks: state.decks
   };
 }
+
+const styles = StyleSheet.create({
+  containerStyle: {
+    padding: 10
+  },
+  buttonStyle: {
+    marginBottom: 10
+  },
+  textStyle: {
+    marginBottom: 10
+  },
+  titleStyle: {
+    fontSize: 30
+  }
+});
 
 export default connect(mapStateToProps)(DeckView);
