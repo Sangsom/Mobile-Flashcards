@@ -12,6 +12,7 @@ class DeckView extends Component {
     const { deckTitle } = this.props.navigation.state.params;
     const deck = this.props.decks[deckTitle];
     const { navigate } = this.props.navigation;
+    console.log(deck);
 
     return (
       <ScrollView>
