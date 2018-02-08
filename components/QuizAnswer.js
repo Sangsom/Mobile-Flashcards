@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
-import { styles } from "../utils/styles";
+import { ScrollView, StyleSheet } from "react-native";
+import { Card, Button } from "react-native-elements";
 import QuizButtons from "./QuizButtons";
+import { blue } from "../utils/colors";
 
 class QuizAnswer extends Component {
   static navigationOptions = {
@@ -14,16 +15,35 @@ class QuizAnswer extends Component {
     const { goBack } = this.props.navigation;
 
     return (
-      <View style={styles.container}>
-        <Text>{answer}</Text>
-        <QuizButtons
-          onCorrect={onCorrect}
-          onIncorrect={onIncorrect}
-          goBack={goBack}
-        />
-      </View>
+      <ScrollView>
+        <Card
+          title={answer}
+          fontFamily="Roboto"
+          image={{
+            uri: "https://picsum.photos/200/300/?random"
+          }}
+        >
+          <Button
+            backgroundColor={blue}
+            title="Question"
+            buttonStyle={styles.buttonStyle}
+            onPress={() => goBack()}
+          />
+          <QuizButtons
+            onCorrect={onCorrect}
+            onIncorrect={onIncorrect}
+            goBack={goBack}
+          />
+        </Card>
+      </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  buttonStyle: {
+    marginBottom: 10
+  }
+});
 
 export default QuizAnswer;
