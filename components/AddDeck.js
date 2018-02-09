@@ -1,62 +1,120 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { StyleSheet, ScrollView, ToastAndroid } from "react-native";
+import {
+  Card,
+  FormValidationMessage,
+  FormLabel,
+  FormInput,
+  Button
+} from "react-native-elements";
 import { connect } from "react-redux";
 import { addDeck } from "../actions/add_deck";
 import { addNewDeck } from "../utils/api";
-
-/**
- * TODO: Notification that deck is added
- * TODO: Validation if there aren't already such a deck
- */
+import { blue } from "../utils/colors";
 
 class AddDeck extends Component {
   state = {
-    title: ""
+    title: "",
+    titleError: null
   };
 
   handleSubmit = () => {
-    const { title } = this.state;
-    const { addDeck } = this.props;
-    const newDeck = {
-      [title]: {
-        title,
-        questions: []
-      }
-    };
+    const { title, titleError } = this.state;
+    const { addDeck, decks, navigation } = this.props;
+    let valid = true;
 
-    addNewDeck(newDeck).then(() => {
-      addDeck(newDeck);
-    });
+    if (title.length < 1) {
+      valid = false;
+      this.setState({
+        titleError: "Title must be longer than 1 character."
+      });
+    }
+
+    if (decks[title]) {
+      valid = false;
+      this.setState({
+        titleError: "Deck with such title already exists!"
+      });
+    }
+
+    if (valid) {
+      const newDeck = {
+        [title]: {
+          title,
+          questions: []
+        }
+      };
+
+      addNewDeck(newDeck).then(() => {
+        addDeck(newDeck);
+
+        // Show success message
+        ToastAndroid.showWithGravity(
+          "Deck added",
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM
+        );
+
+        navigation.navigate("Decks");
+      });
+    }
   };
 
   render() {
+    const { titleError } = this.state;
+
     return (
-      <View style={styles.container}>
-        <Text>What is the title of your new deck?</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Deck Title"
-          onChangeText={text => this.setState({ title: text })}
-        />
-        <Button title="Submit" onPress={this.handleSubmit} />
-      </View>
+      <ScrollView>
+        <Card>
+          <FormLabel
+            containerStyle={styles.containerStyle}
+            labelStyle={styles.labelStyle}
+          >
+            Deck Title
+          </FormLabel>
+          <FormInput
+            containerStyle={styles.containerStyle}
+            inputStyle={styles.inputStyle}
+            placeholder="Enter your deck title"
+            onChangeText={text => this.setState({ title: text })}
+            shake={titleError != null ? true : false}
+          />
+          {titleError != null && (
+            <FormValidationMessage>{titleError}</FormValidationMessage>
+          )}
+          <Button
+            buttonStyle={styles.buttonStyle}
+            backgroundColor={blue}
+            title="Submit"
+            onPress={this.handleSubmit}
+          />
+        </Card>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 50
+  containerStyle: {
+    marginBottom: 10
   },
-  input: {
-    padding: 10,
-    fontSize: 20,
-    width: "100%"
+  labelStyle: {
+    fontFamily: "Roboto",
+    fontSize: 20
+  },
+  inputStyle: {
+    padding: 5
+  },
+  buttonStyle: {
+    marginTop: 10,
+    marginBottom: 10
   }
 });
 
-export default connect(null, { addDeck })(AddDeck);
+function mapStateToProps(state) {
+  return {
+    decks: state.decks
+  };
+}
+
+export default connect(mapStateToProps, { addDeck })(AddDeck);
