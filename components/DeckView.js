@@ -14,6 +14,7 @@ class DeckView extends Component {
     const { deckTitle } = this.props.navigation.state.params;
     const deck = this.props.decks[deckTitle];
     const { navigate } = this.props.navigation;
+    let disabled = deck.questions.length === 0 ? true : false;
 
     return (
       <ScrollView>
@@ -44,6 +45,7 @@ class DeckView extends Component {
             onPress={() => {
               navigate("Quiz", { title: deckTitle });
             }}
+            disabled={disabled}
           />
         </Card>
       </ScrollView>
