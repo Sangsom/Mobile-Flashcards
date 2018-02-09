@@ -2,8 +2,8 @@
 Todo:
   ✔ Add Redux Thunk @done(18-02-09 11:31)
   ✔ Add Prop-Types @done(18-02-09 13:39)
-  ☐ Show list of cards for deck
+  ✔ Show list of cards for deck @done(18-02-09 16:32)
   ☐ Save results as a history?
   ✔ If there are no cards then disable quiz button @done(18-02-09 13:44)
-  ☐ Delete card from deck
+  ✔ Delete card from deck @done(18-02-09 16:32)
   ☐ Delete deck
