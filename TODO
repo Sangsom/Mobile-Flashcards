@@ -4,3 +4,6 @@ Todo:
   ☐ Add Prop-Types
   ☐ Show list of cards for deck
   ☐ Save results as a history?
+  ☐ If there are no cards then disable quiz button
+  ☐ Delete card from deck
+  ☐ Delete deck

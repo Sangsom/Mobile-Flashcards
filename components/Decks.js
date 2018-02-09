@@ -5,6 +5,7 @@ import { receiveDecks } from "../actions/receive_decks";
 import { fetchDecks } from "../utils/api";
 import _ from "lodash";
 import { List, ListItem } from "react-native-elements";
+import PropTypes from "prop-types";
 
 class Decks extends Component {
   componentDidMount() {
@@ -49,5 +50,11 @@ function mapStateToProps(state) {
     decks: state.decks
   };
 }
+
+Decks.propTypes = {
+  decks: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
+  receiveDecks: PropTypes.func.isRequired
+};
 
 export default connect(mapStateToProps, { receiveDecks })(Decks);

@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { addCard } from "../actions/add_card";
 import { addNewCard } from "../utils/api";
 import { blue } from "../utils/colors";
+import PropTypes from "prop-types";
 
 class AddCard extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -134,5 +135,10 @@ const styles = StyleSheet.create({
     marginBottom: 10
   }
 });
+
+AddCard.propTypes = {
+  addCard: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired
+};
 
 export default connect(null, { addCard })(AddCard);

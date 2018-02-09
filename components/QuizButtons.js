@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Button, Text } from "react-native-elements";
 import Icon from "react-native-vector-icons/Entypo";
 import { green, red } from "../utils/colors";
+import PropTypes from "prop-types";
 
 const QuizButtons = props => {
   const { onCorrect, onIncorrect } = props;
@@ -43,5 +44,11 @@ const styles = StyleSheet.create({
     marginBottom: 10
   }
 });
+
+QuizButtons.propTypes = {
+  onCorrect: PropTypes.func.isRequired,
+  onIncorrect: PropTypes.func.isRequired,
+  goBack: PropTypes.func
+};
 
 export default QuizButtons;

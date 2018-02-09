@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { addDeck } from "../actions/add_deck";
 import { addNewDeck } from "../utils/api";
 import { blue } from "../utils/colors";
+import PropTypes from "prop-types";
 
 class AddDeck extends Component {
   state = {
@@ -116,5 +117,11 @@ function mapStateToProps(state) {
     decks: state.decks
   };
 }
+
+AddDeck.propTypes = {
+  decks: PropTypes.object.isRequired,
+  addDeck: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps, { addDeck })(AddDeck);

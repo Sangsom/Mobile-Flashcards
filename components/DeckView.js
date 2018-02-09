@@ -3,6 +3,7 @@ import { Text, ScrollView, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { Card, Button } from "react-native-elements";
 import { blue } from "../utils/colors";
+import PropTypes from "prop-types";
 
 class DeckView extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -70,5 +71,10 @@ const styles = StyleSheet.create({
     fontSize: 30
   }
 });
+
+DeckView.propTypes = {
+  decks: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps)(DeckView);

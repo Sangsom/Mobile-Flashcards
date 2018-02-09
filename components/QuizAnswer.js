@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import { Card, Button } from "react-native-elements";
 import QuizButtons from "./QuizButtons";
 import { blue } from "../utils/colors";
+import PropTypes from "prop-types";
 
 class QuizAnswer extends Component {
   static navigationOptions = {
@@ -45,5 +46,9 @@ const styles = StyleSheet.create({
     marginBottom: 10
   }
 });
+
+QuizAnswer.propTypes = {
+  navigation: PropTypes.object.isRequired
+};
 
 export default QuizAnswer;

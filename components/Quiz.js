@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import QuizButtons from "./QuizButtons";
 import QuizResults from "./QuizResults";
 import { blue } from "../utils/colors";
+import PropTypes from "prop-types";
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -126,5 +127,10 @@ function mapStateToProps(state) {
     decks: state.decks
   };
 }
+
+Quiz.propTypes = {
+  decks: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps)(Quiz);
