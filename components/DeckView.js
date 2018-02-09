@@ -40,6 +40,14 @@ class DeckView extends Component {
           />
           <Button
             backgroundColor={blue}
+            title="Show Cards"
+            buttonStyle={styles.buttonStyle}
+            onPress={() => {
+              navigate("CardList", { title: deckTitle });
+            }}
+          />
+          <Button
+            backgroundColor={blue}
             title="Start Quiz"
             buttonStyle={styles.buttonStyle}
             onPress={() => {

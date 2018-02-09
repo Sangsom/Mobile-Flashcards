@@ -51,3 +51,27 @@ export function addNewCard(card, title) {
       });
     });
 }
+
+export function removeCard(title, question) {
+  // Need to update deck with removed card
+  return AsyncStorage.getItem(STORE_KEY)
+    .then(result => {
+      let decks = JSON.parse(result);
+
+      // Remove question
+      let questions = JSON.parse(JSON.stringify(decks[title].questions));
+      questions = questions.filter(q => q.question !== question);
+
+      // Create new updated card
+      const newCard = JSON.stringify({
+        [title]: { title, questions }
+      });
+
+      return newCard;
+    })
+    .then(updatedDeck => {
+      return AsyncStorage.mergeItem(STORE_KEY, updatedDeck).then(result => {
+        return AsyncStorage.getItem(STORE_KEY);
+      });
+    });
+}
