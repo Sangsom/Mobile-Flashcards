@@ -1,14 +1,40 @@
 import React, { Component } from "react";
-import { Text, ScrollView, StyleSheet } from "react-native";
+import { Text, ScrollView, StyleSheet, Alert } from "react-native";
 import { connect } from "react-redux";
 import { Card, Button } from "react-native-elements";
-import { blue } from "../utils/colors";
+import { blue, red } from "../utils/colors";
 import PropTypes from "prop-types";
+import { removeDeck } from "../utils/api";
+import { deleteDeck } from "../actions/delete_deck";
 
 class DeckView extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: `Viewing: ${navigation.state.params.deckTitle} deck`
   });
+
+  alert = deckTitle => {
+    Alert.alert(
+      "Delete deck",
+      `Are you sure you want to delete ${deckTitle} deck?`,
+      [
+        { text: "Cancel", onPress: () => console.log("Cancelled") },
+        { text: "Delete", onPress: () => this.delete(deckTitle) }
+      ]
+    );
+  };
+
+  delete = deckTitle => {
+    console.log("Pressed", deckTitle);
+    const { deleteDeck, navigation } = this.props;
+    //deleteDeck(deckTitle);
+
+    removeDeck(deckTitle).then(result => {
+      // How to handle deck deletion???
+      //  console.log(result);
+      //deleteDeck(deckTitle);
+      // navigation.navigate("Decks");
+    });
+  };
 
   render() {
     const { deckTitle } = this.props.navigation.state.params;
@@ -55,6 +81,12 @@ class DeckView extends Component {
             }}
             disabled={disabled}
           />
+          <Button
+            backgroundColor={red}
+            title="Delete Deck"
+            buttonStyle={styles.buttonStyle}
+            onPress={() => this.alert(deckTitle)}
+          />
         </Card>
       </ScrollView>
     );
@@ -84,7 +116,8 @@ const styles = StyleSheet.create({
 
 DeckView.propTypes = {
   decks: PropTypes.object.isRequired,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  deleteDeck: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps)(DeckView);
+export default connect(mapStateToProps, { deleteDeck })(DeckView);

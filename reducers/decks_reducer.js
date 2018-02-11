@@ -2,8 +2,10 @@ import {
   RECEIVE_DECKS,
   ADD_DECK,
   ADD_CARD,
-  DELETE_CARD
+  DELETE_CARD,
+  DELETE_DECK
 } from "../actions/actions";
+import _ from "lodash";
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -33,6 +35,11 @@ export default function(state = {}, action) {
           })
         }
       };
+    case DELETE_DECK:
+      // console.log("REDUCER", action.title);
+      // console.log(state);
+      //return _.omit(state, action.title);
+      return state;
     default:
       return state;
   }

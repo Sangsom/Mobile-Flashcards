@@ -1,5 +1,6 @@
 import { AsyncStorage } from "react-native";
 import { STORE_KEY, initialDecks } from "../utils/constants";
+import _ from "lodash";
 
 /**
  * Request storage for decks
@@ -73,5 +74,20 @@ export function removeCard(title, question) {
       return AsyncStorage.mergeItem(STORE_KEY, updatedDeck).then(result => {
         return AsyncStorage.getItem(STORE_KEY);
       });
+    });
+}
+
+export function removeDeck(title) {
+  return AsyncStorage.getItem(STORE_KEY)
+    .then(result => {
+      let decks = JSON.parse(result);
+      let newDecks = _.omit(decks, title);
+
+      return newDecks;
+    })
+    .then(updatedDeck => {
+      // Do I need to set up new decs or merge ?
+      //  console.log(updatedDeck);
+      // return AsyncStorage.setItem(STORE_KEY, JSON.stringify(updatedDeck));
     });
 }
