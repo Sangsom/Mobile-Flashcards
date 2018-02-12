@@ -36,10 +36,7 @@ export default function(state = {}, action) {
         }
       };
     case DELETE_DECK:
-      // console.log("REDUCER", action.title);
-      // console.log(state);
-      //return _.omit(state, action.title);
-      return state;
+      return { ...action.decks };
     default:
       return state;
   }

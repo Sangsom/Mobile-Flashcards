@@ -1,14 +1,18 @@
 import { DELETE_DECK } from "./actions";
+import { removeDeck } from "../utils/api";
 
-export function deleteDeck(title) {
+export function deleteDeck(title, callback) {
   return dispatch => {
-    dispatch(deleteDeckAsync(title));
+    removeDeck(title).then(decks => {
+      callback();
+      dispatch(deleteDeckAsync(JSON.parse(decks)));
+    });
   };
 }
 
-function deleteDeckAsync(title) {
+function deleteDeckAsync(decks) {
   return {
     type: DELETE_DECK,
-    title
+    decks
   };
 }

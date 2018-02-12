@@ -24,15 +24,10 @@ class DeckView extends Component {
   };
 
   delete = deckTitle => {
-    console.log("Pressed", deckTitle);
     const { deleteDeck, navigation } = this.props;
-    //deleteDeck(deckTitle);
 
-    removeDeck(deckTitle).then(result => {
-      // How to handle deck deletion???
-      //  console.log(result);
-      //deleteDeck(deckTitle);
-      // navigation.navigate("Decks");
+    deleteDeck(deckTitle, () => {
+      navigation.navigate("Decks");
     });
   };
 
@@ -40,54 +35,61 @@ class DeckView extends Component {
     const { deckTitle } = this.props.navigation.state.params;
     const deck = this.props.decks[deckTitle];
     const { navigate } = this.props.navigation;
-    let disabled = deck.questions.length === 0 ? true : false;
+
+    let disabled = true;
+    if (deck) {
+      disabled = deck.questions.length === 0 ? true : false;
+    }
 
     return (
       <ScrollView>
-        <Card
-          title={deckTitle}
-          titleStyle={styles.titleStyle}
-          fontFamily="Roboto"
-          image={{
-            uri: "https://picsum.photos/200/300/?random"
-          }}
-          containerStyle={styles.containerStyle}
-        >
-          <Text style={styles.textStyle}>
-            {deck.questions.length} card(-s) are hidden in this deck.
-          </Text>
-          <Button
-            backgroundColor={blue}
-            title="Add Card"
-            buttonStyle={styles.buttonStyle}
-            onPress={() => {
-              navigate("AddCard", { title: deckTitle });
+        {deck ? (
+          <Card
+            title={deckTitle}
+            titleStyle={styles.titleStyle}
+            fontFamily="Roboto"
+            image={{
+              uri: "https://picsum.photos/200/300/?random"
             }}
-          />
-          <Button
-            backgroundColor={blue}
-            title="Show Cards"
-            buttonStyle={styles.buttonStyle}
-            onPress={() => {
-              navigate("CardList", { title: deckTitle });
-            }}
-          />
-          <Button
-            backgroundColor={blue}
-            title="Start Quiz"
-            buttonStyle={styles.buttonStyle}
-            onPress={() => {
-              navigate("Quiz", { title: deckTitle });
-            }}
-            disabled={disabled}
-          />
-          <Button
-            backgroundColor={red}
-            title="Delete Deck"
-            buttonStyle={styles.buttonStyle}
-            onPress={() => this.alert(deckTitle)}
-          />
-        </Card>
+            containerStyle={styles.containerStyle}
+          >
+            <Text style={styles.textStyle}>
+              {deck.questions.length} card(-s) are hidden in this deck.
+            </Text>
+            <Button
+              backgroundColor={blue}
+              title="Add Card"
+              buttonStyle={styles.buttonStyle}
+              onPress={() => {
+                navigate("AddCard", { title: deckTitle });
+              }}
+            />
+            <Button
+              backgroundColor={blue}
+              title="Show Cards"
+              buttonStyle={styles.buttonStyle}
+              onPress={() => {
+                navigate("CardList", { title: deckTitle });
+              }}
+            />
+            <Button
+              backgroundColor={blue}
+              title="Start Quiz"
+              buttonStyle={styles.buttonStyle}
+              onPress={() => {
+                navigate("Quiz", { title: deckTitle });
+              }}
+            />
+            <Button
+              backgroundColor={red}
+              title="Delete Deck"
+              buttonStyle={styles.buttonStyle}
+              onPress={() => this.alert(deckTitle)}
+            />
+          </Card>
+        ) : (
+          <Text>There is no deck to show!!!</Text>
+        )}
       </ScrollView>
     );
   }

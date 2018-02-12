@@ -86,8 +86,8 @@ export function removeDeck(title) {
       return newDecks;
     })
     .then(updatedDeck => {
-      // Do I need to set up new decs or merge ?
-      //  console.log(updatedDeck);
-      // return AsyncStorage.setItem(STORE_KEY, JSON.stringify(updatedDeck));
+      AsyncStorage.setItem(STORE_KEY, JSON.stringify(updatedDeck));
+
+      return JSON.stringify(updatedDeck);
     });
 }
