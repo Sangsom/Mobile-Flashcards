@@ -3,12 +3,14 @@ import { View } from "react-native";
 import { connect } from "react-redux";
 import { receiveDecks } from "../actions/receive_decks";
 import { fetchDecks } from "../utils/api";
+import { setLocalNotification } from "../utils/notificationAPI";
 import _ from "lodash";
 import { List, ListItem } from "react-native-elements";
 import PropTypes from "prop-types";
 
 class Decks extends Component {
   componentDidMount() {
+    setLocalNotification();
     fetchDecks().then(decks => {
       this.props.receiveDecks(decks);
     });
