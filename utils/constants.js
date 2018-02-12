@@ -1,4 +1,4 @@
-export const STORE_KEY = "@MobileFlashCards:xxzzsxsxx";
+export const STORE_KEY = "@MobileFlashCards:Sangsom";
 
 export const initialDecks = {
   React: {

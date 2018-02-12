@@ -1,5 +1,12 @@
 {
   "expo": {
-    "sdkVersion": "25.0.0"
+    "name": "Mobile Flashcards",
+    "slug": "mobile-flashcards",
+    "privacy": "public",
+    "sdkVersion": "25.0.0",
+    "description":
+      "This is the React-Native Mobile Flashcards project built specifically for React Nanodegree at Udacity. App can add decks and flashcards to to them. Afterwards you can take a quiz and see your results at the end of quiz.",
+    "version": "1.0.0",
+    "githubUrl": "https://github.com/Sangsom/Mobile-Flashcards.git"
   }
 }
