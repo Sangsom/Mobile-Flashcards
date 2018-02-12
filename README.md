@@ -23,3 +23,7 @@ To start using this project follow these steps:
 4. Start the project `yarn start`
 5. Open project trough Expo or other emulator.
 6. Project is created with `create-react-native-app` so for more details please visit [Create React Native App documentation](https://github.com/react-community/create-react-native-app).
+
+## Project on Expo
+
+Project is also published on [Expo](https://expo.io/@sangsom/mobile-flashcards).
