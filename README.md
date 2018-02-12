@@ -27,3 +27,7 @@ To start using this project follow these steps:
 ## Project on Expo
 
 Project is also published on [Expo](https://expo.io/@sangsom/mobile-flashcards).
+
+### Project tests
+
+Project is tested only on Android phones.
