@@ -3,7 +3,6 @@ import Tabs from "./TabNav";
 import DeckView from "./DeckView";
 import AddCard from "./AddCard";
 import Quiz from "./Quiz";
-import QuizAnswer from "./QuizAnswer";
 import CardList from "./CardList";
 
 const MainNavigator = StackNavigator({
@@ -18,9 +17,6 @@ const MainNavigator = StackNavigator({
   },
   Quiz: {
     screen: Quiz
-  },
-  QuizAnswer: {
-    screen: QuizAnswer
   },
   CardList: {
     screen: CardList
