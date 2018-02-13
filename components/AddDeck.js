@@ -56,7 +56,9 @@ class AddDeck extends Component {
           ToastAndroid.BOTTOM
         );
 
-        navigation.navigate("Decks");
+        navigation.navigate("DeckView", {
+          deckTitle: title
+        });
       });
     }
   };
