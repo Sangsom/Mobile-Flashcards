@@ -2,7 +2,7 @@ import { NOTIFICATION_KEY } from "./constants";
 import { AsyncStorage } from "react-native";
 import { Notifications, Permissions } from "expo";
 
-function createNotification() {
+const createNotification = () => {
   return {
     title: "Mobile Flashcards",
     body: `Don't forget to check the quiz today!!!`,
@@ -14,7 +14,7 @@ function createNotification() {
       vibrate: true
     }
   };
-}
+};
 
 export function setLocalNotification() {
   AsyncStorage.getItem(NOTIFICATION_KEY)
