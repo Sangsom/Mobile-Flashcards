@@ -47,11 +47,7 @@ class Decks extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    decks: state.decks
-  };
-}
+const mapStateToProps = ({ decks }) => ({ decks });
 
 Decks.propTypes = {
   decks: PropTypes.object.isRequired,

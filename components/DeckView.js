@@ -95,11 +95,7 @@ class DeckView extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    decks: state.decks
-  };
-}
+const mapStateToProps = ({ decks }) => ({ decks });
 
 const styles = StyleSheet.create({
   containerStyle: {

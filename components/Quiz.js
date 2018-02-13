@@ -124,11 +124,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(state) {
-  return {
-    decks: state.decks
-  };
-}
+const mapStateToProps = ({ decks }) => ({ decks });
 
 Quiz.propTypes = {
   decks: PropTypes.object.isRequired,

@@ -55,11 +55,7 @@ class CardList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    decks: state.decks
-  };
-}
+const mapStateToProps = ({ decks }) => ({ decks });
 
 CardList.propTypes = {
   decks: PropTypes.object.isRequired,
