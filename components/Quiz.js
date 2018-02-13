@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Card, Button, Divider } from "react-native-elements";
 import { connect } from "react-redux";
 import QuizButtons from "./QuizButtons";
 import QuizResults from "./QuizResults";
-import { blue } from "../utils/colors";
+import { blue, grey, green } from "../utils/colors";
 import PropTypes from "prop-types";
+import FlipCard from "react-native-flip-card";
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -16,7 +17,8 @@ class Quiz extends Component {
     questions: [],
     currentQuestion: 0,
     correct: 0,
-    incorrect: 0
+    incorrect: 0,
+    flip: false
   };
 
   componentDidMount() {
@@ -67,33 +69,61 @@ class Quiz extends Component {
     }
   };
 
+  toggleAnswer = () => {
+    const { flip } = this.state;
+    this.setState({ flip: !flip });
+  };
+
   render() {
     const { navigate } = this.props.navigation;
-    const { questions, currentQuestion, correct, incorrect } = this.state;
+    const { questions, currentQuestion, correct, incorrect, flip } = this.state;
     const { title } = this.props.navigation.state.params;
     return (
       <ScrollView>
         {currentQuestion < questions.length ? (
           <Card
             title={this.showQuestion()}
+            titleStyle={styles.titleStyle}
             fontFamily="Roboto"
             image={{
               uri: "https://picsum.photos/200/300/?random"
             }}
           >
+            <FlipCard
+              friction={12}
+              perspective={2000}
+              flipHorizontal={false}
+              flipVertical={true}
+              flip={flip}
+              clickable={true}
+              alignHeight={true}
+              style={{
+                borderRadius: 4,
+                borderWidth: 0.5,
+                borderColor: grey,
+                alignItems: "center",
+                marginBottom: 10
+              }}
+              onPress={() => {
+                console.log("Clicked");
+              }}
+            >
+              <View>
+                <Text style={styles.flipCardStyle}>{this.showQuestion()}</Text>
+              </View>
+              <View>
+                <Text style={styles.flipCardStyle}>
+                  {questions[currentQuestion].answer}
+                </Text>
+              </View>
+            </FlipCard>
             <Text>{this.cardCounter()}</Text>
             <Divider style={styles.dividerStyle} />
             <Button
               backgroundColor={blue}
-              title="Answer"
+              title="Show Answer"
               buttonStyle={styles.buttonStyle}
-              onPress={() => {
-                navigate("QuizAnswer", {
-                  question: questions[currentQuestion],
-                  onCorrect: this.correct,
-                  onIncorrect: this.incorrect
-                });
-              }}
+              onPress={this.toggleAnswer}
             />
             <QuizButtons
               onCorrect={this.correct}
@@ -118,9 +148,17 @@ const styles = StyleSheet.create({
   buttonStyle: {
     marginBottom: 10
   },
+  titleStyle: {
+    fontSize: 20
+  },
   dividerStyle: {
     marginTop: 10,
     marginBottom: 10
+  },
+  flipCardStyle: {
+    fontSize: 20,
+    padding: 10,
+    fontFamily: "Roboto"
   }
 });
 
