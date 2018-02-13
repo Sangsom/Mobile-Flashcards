@@ -6,7 +6,7 @@ import { blue } from "../utils/colors";
 import PropTypes from "prop-types";
 
 const QuizResults = props => {
-  const { quizLength, correct, incorrect, navigate } = props;
+  const { quizLength, correct, incorrect, navigate, deckTitle } = props;
 
   return (
     <ScrollView>
@@ -15,13 +15,25 @@ const QuizResults = props => {
           You have answered {correct} out of {quizLength} questions correctly.
         </Text>
         <Text>Correct: {getPercent(correct, quizLength)}%</Text>
-        <Text>Incorrect: {getPercent(incorrect, quizLength)}%</Text>
+        <Text style={{ marginBottom: 10 }}>
+          Incorrect: {getPercent(incorrect, quizLength)}%
+        </Text>
         <Button
           backgroundColor={blue}
-          title="To decks"
+          title="Restart Quiz"
           buttonStyle={styles.buttonStyle}
           onPress={() => {
-            navigate("Decks");
+            navigate("Quiz", { title: deckTitle });
+          }}
+        />
+        <Button
+          backgroundColor={blue}
+          title="Back to Deck"
+          buttonStyle={styles.buttonStyle}
+          onPress={() => {
+            navigate("DeckView", {
+              deckTitle
+            });
           }}
         />
       </Card>
@@ -31,7 +43,6 @@ const QuizResults = props => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    marginTop: 10,
     marginBottom: 10
   }
 });

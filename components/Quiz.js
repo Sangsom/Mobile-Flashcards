@@ -70,6 +70,7 @@ class Quiz extends Component {
   render() {
     const { navigate } = this.props.navigation;
     const { questions, currentQuestion, correct, incorrect } = this.state;
+    const { title } = this.props.navigation.state.params;
     return (
       <ScrollView>
         {currentQuestion < questions.length ? (
@@ -105,6 +106,7 @@ class Quiz extends Component {
             correct={correct}
             incorrect={incorrect}
             navigate={navigate}
+            deckTitle={title}
           />
         )}
       </ScrollView>
