@@ -114,11 +114,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(state) {
-  return {
-    decks: state.decks
-  };
-}
+const mapStateToProps = ({ decks }) => ({ decks });
 
 AddDeck.propTypes = {
   decks: PropTypes.object.isRequired,
