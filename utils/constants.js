@@ -1,6 +1,8 @@
 export const STORE_KEY = "@MobileFlashCard:Sangsom";
 export const NOTIFICATION_KEY = "@MobileFlashCardsNotification:Sangsom";
 
+export const image = require("../assets/images/bg_image.jpg");
+
 export const initialDecks = {
   React: {
     title: "React",

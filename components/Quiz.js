@@ -7,6 +7,7 @@ import QuizResults from "./QuizResults";
 import { blue, grey, green } from "../utils/colors";
 import PropTypes from "prop-types";
 import FlipCard from "react-native-flip-card";
+import { image } from "../utils/constants";
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -85,9 +86,7 @@ class Quiz extends Component {
             title={this.showQuestion()}
             titleStyle={styles.titleStyle}
             fontFamily="Roboto"
-            image={{
-              uri: "https://picsum.photos/200/300/?random"
-            }}
+            image={image}
           >
             <FlipCard
               friction={12}

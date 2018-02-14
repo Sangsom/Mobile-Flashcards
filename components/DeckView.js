@@ -6,6 +6,7 @@ import { blue, red } from "../utils/colors";
 import PropTypes from "prop-types";
 import { removeDeck } from "../utils/api";
 import { deleteDeck } from "../actions/delete_deck";
+import { image } from "../utils/constants";
 
 class DeckView extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -49,9 +50,7 @@ class DeckView extends Component {
             title={deckTitle}
             titleStyle={styles.titleStyle}
             fontFamily="Roboto"
-            image={{
-              uri: "https://picsum.photos/200/300/?random"
-            }}
+            image={image}
             containerStyle={styles.containerStyle}
           >
             <Text style={styles.textStyle}>
