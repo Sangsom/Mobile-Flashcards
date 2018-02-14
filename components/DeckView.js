@@ -36,11 +36,11 @@ class DeckView extends Component {
     const deck = this.props.decks[deckTitle];
     const { navigate } = this.props.navigation;
 
-    const disabled = () => {
+    const disabled = (() => {
       if (deck) {
         return deck.questions.length === 0 ? true : false;
       }
-    };
+    })();
 
     return (
       <ScrollView>
