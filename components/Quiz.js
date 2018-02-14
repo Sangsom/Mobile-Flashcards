@@ -43,9 +43,11 @@ class Quiz extends Component {
     const { questions, currentQuestion, correct } = this.state;
 
     if (currentQuestion < questions.length) {
-      this.setState({
-        currentQuestion: currentQuestion + 1,
-        correct: correct + 1
+      this.setState(prevState => {
+        return {
+          currentQuestion: prevState.currentQuestion + 1,
+          correct: prevState.correct + 1
+        };
       });
     }
   };
@@ -54,9 +56,11 @@ class Quiz extends Component {
     const { questions, currentQuestion, incorrect } = this.state;
 
     if (currentQuestion < questions.length) {
-      this.setState({
-        currentQuestion: currentQuestion + 1,
-        incorrect: incorrect + 1
+      this.setState(prevState => {
+        return {
+          currentQuestion: prevState.currentQuestion + 1,
+          incorrect: prevState.incorrect + 1
+        };
       });
     }
   };
@@ -95,7 +99,7 @@ class Quiz extends Component {
               flipVertical={true}
               flip={flip}
               clickable={true}
-              alignHeight={true}
+              alignHeight={false}
               style={{
                 borderRadius: 4,
                 borderWidth: 0.5,
