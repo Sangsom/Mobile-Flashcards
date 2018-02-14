@@ -59,6 +59,9 @@ class AddDeck extends Component {
         navigation.navigate("DeckView", {
           deckTitle: title
         });
+
+        // Clean the form
+        this.setState({ title: "", titleError: "" });
       });
     }
   };
