@@ -36,10 +36,11 @@ class DeckView extends Component {
     const deck = this.props.decks[deckTitle];
     const { navigate } = this.props.navigation;
 
-    let disabled = true;
-    if (deck) {
-      disabled = deck.questions.length === 0 ? true : false;
-    }
+    const disabled = () => {
+      if (deck) {
+        return deck.questions.length === 0 ? true : false;
+      }
+    };
 
     return (
       <ScrollView>
@@ -79,6 +80,7 @@ class DeckView extends Component {
               onPress={() => {
                 navigate("Quiz", { title: deckTitle });
               }}
+              disabled={disabled}
             />
             <Button
               backgroundColor={red}
